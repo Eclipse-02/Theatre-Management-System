@@ -4,7 +4,6 @@
 #include "headers/userfunction.h"
 
 int choice, amount;
-char seats[34];
 
 void adminLogin() {
     while (1) {
