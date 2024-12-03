@@ -6,6 +6,7 @@
 int choice, amount;
 
 void adminLogin() {
+    printf("\033[H\033[J");
     while (1) {
         printf("\n=======================Admin Menu=======================\n");
         printf("1. Add Films\n");
@@ -42,6 +43,7 @@ void adminLogin() {
 }
 
 void userLogin() {
+    printf("\033[H\033[J");
     while (1) {
         printf("\n=======================User Menu=======================\n");
         printf("1. Book Film\n");
@@ -77,7 +79,8 @@ void userLogin() {
 
 int main() {
     while (1) {
-        printf("\n==============================================\n");
+        printf("\033[H\033[J");
+        printf("==============================================\n");
         printf("| Theatre Management System                  |\n");
         printf("==============================================\n");
         printf("Login as:\n");

@@ -6,6 +6,7 @@ void addFilms(int amount) {
     struct Film film[amount];
 
     for (i = 0; i < amount; i++) {
+        printf("\033[H\033[J");
         printf("\n// Data %d :\n", i + 1);
         printf("| Id                                  : ");
         scanf("%d", &film[i].id);
@@ -64,10 +65,21 @@ void addFilms(int amount) {
         fclose(seat_file);
     }
 
-    printf("================Data Successfully Stored================\n\n");
+    printf("\033[H\033[J");
+    for (i = 0; i < amount; i++) {
+        printf("\n// Film Info:\n");
+        printf("| Id: %d\n", film[i].id);
+        printf("| Name: %s\n", film[i].name);
+        printf("| Release Date: %s\n", film[i].release_date);
+        printf("| Rating: %.2f\n", film[i].rating);
+        printf("| Price: %.2f\n", film[i].price);
+        printf("| Genre(s): %s\n", film[i].genre);
+    }
+    printf("================Data Successfully Stored================\n");
 }
 
 void readFilms(bool isViewing) {
+    printf("\033[H\033[J");
     FILE *file = fopen(FILM_FILE_PATH, "r");
 
     if (file == NULL) {
@@ -89,12 +101,16 @@ void readFilms(bool isViewing) {
     if (isViewing) {
         printf("// Press any key to continue...");
         getch();
+        printf("\033[H\033[J");
     }
 }
 
 void viewFilmSeats(int id) {
+    printf("\033[H\033[J");
     FILE *film_file = fopen(FILM_FILE_PATH, "r");
     char read[64];
+    char filmName[50];
+    bool isFound;
 
     if (film_file == NULL) {
         printf("Cannot open file!\n");
@@ -104,6 +120,8 @@ void viewFilmSeats(int id) {
     struct Film film;
     while (fscanf(film_file, "%d %49[^;]; %s %f %f %99[^;];", &film.id, film.name, film.release_date, &film.rating, &film.price, film.genre) != EOF) {
         if (id ==  film.id) {
+            isFound = true;
+            strcpy(filmName, film.name);
             char filepath[] = "./data/seats/";
             strcat(filepath, film.name);
             strcat(filepath, ".txt");
@@ -113,6 +131,7 @@ void viewFilmSeats(int id) {
                 exit(1);
             }
 
+            printf(">> %s\n", filmName);
             printf(" |");
             for (i = 0; i < 7; i++) {
                 printf(" %d", row[i]);
@@ -127,15 +146,20 @@ void viewFilmSeats(int id) {
                 i++;
             }
 
-            printf("\n-|----------------\n");
+            printf("-|----------------\n");
 
             fclose(seat_file);
             printf("// Note: (o) empty, (x) reserved\n");
             printf("// Press any key to continue...");
             getch();
-        } else {
-            printf("=!!Invalid Id!!=\n");
+            printf("\033[H\033[J");
+            break;
         }
+    }
+
+    if (isFound != true) {
+        printf("\033[H\033[J");
+        printf("=!!Invalid Id!!=");
     }
 
     fclose(film_file);

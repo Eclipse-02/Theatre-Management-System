@@ -17,10 +17,12 @@ int convertToInt(char c[]) {
 }
 
 void addTransaction(int id) {
+    printf("\033[H\033[J");
     FILE *seat_file;
     struct Ticket ticket;
     char temp_seat[3], temp_char[2];
     int num1, num2, x;
+    bool isFound;
 
     printf("\n// Fill your data:\n");
     printf("| Full Name                           : ");
@@ -41,6 +43,7 @@ void addTransaction(int id) {
     struct Film film;
     while (fscanf(film_file, "%d %49[^;]; %s %f %f %99[^;];", &film.id, film.name, film.release_date, &film.rating, &film.price, film.genre) != EOF) {
         if (id == film.id) {
+            isFound = true;
             strncpy(ticket.film_name, film.name, sizeof(film.name));
             ticket.total_price = film.price * ticket.ticket_amount;
             char filepath[] = "./data/seats/";
@@ -49,6 +52,7 @@ void addTransaction(int id) {
 
             j = 0;
             while(j != ticket.ticket_amount) {
+                printf("\033[H\033[J");
                 seat_file = fopen(filepath, "r+");
 
                 if (seat_file == NULL) {
@@ -56,7 +60,8 @@ void addTransaction(int id) {
                     exit(1);
                 }
 
-                printf("\n |");
+                printf(">> Ticket-%d\n", j + 1);
+                printf(" |");
                 for (i = 0; i < 7; i++) {
                     printf(" %d", row[i]);
                 }
@@ -119,11 +124,20 @@ void addTransaction(int id) {
                 ticket.total_price
             );
 
-            printf("================Data Successfully Stored================\n\n");
+            printf("\033[H\033[J");
+            printf("// Book Info:\n");
+            printf("| Full Name     : %s\n", ticket.full_name);
+            printf("| Film Name     : %s\n", ticket.film_name);
+            printf("| Ticket Amount : %d\n", ticket.ticket_amount);
+            printf("| Total Price   : %.2f\n", ticket.total_price);
+            printf("| Seat No(s)    : %s\n", ticket.seat_no);
+            printf("================Data Successfully Stored================\n");
             break;
-        } else {
-            printf("=!!Invalid Id!!=\n");
-        }
+        } 
+    }
+
+    if (isFound != true) {
+        printf("=!!Invalid Id!!=");
     }
 
     fclose(film_file);
@@ -131,6 +145,7 @@ void addTransaction(int id) {
 }
 
 void readTransaction() {
+    printf("\033[H\033[J");
     FILE *file = fopen(TRANSACTION_FILE_PATH, "r");
 
     if (file == NULL) {
@@ -151,5 +166,6 @@ void readTransaction() {
 
     printf("// Press any key to continue...");
     getch();
+    printf("\033[H\033[J");
 }
 #endif
