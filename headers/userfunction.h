@@ -50,9 +50,9 @@ void addTransaction(int id) {
             strcat(filepath, film.name);
             strcat(filepath, ".txt");
 
+            printf("\033[H\033[J");
             j = 0;
             while(j != ticket.ticket_amount) {
-                printf("\033[H\033[J");
                 seat_file = fopen(filepath, "r+");
 
                 if (seat_file == NULL) {
@@ -76,7 +76,7 @@ void addTransaction(int id) {
                     i++;
                 }
 
-                printf("\n-|----------------\n");
+                printf("-|----------------\n");
 
                 printf("// Note: (o) empty, (x) reserved\n");
                 printf("// Select Your Seat Column (ex: A) >> ");
@@ -91,8 +91,10 @@ void addTransaction(int id) {
                 fseek(seat_file, x, SEEK_SET);
 
                 if (fgetc(seat_file) == 'x') {
-                    printf("=!!Seat is Booked!!=");
+                    printf("\033[H\033[J");
+                    printf("=!!Seat is Booked!!=\n");
                 } else {
+                    printf("\033[H\033[J");
                     fseek(seat_file, x, SEEK_SET);
                     fwrite("x", 1, 1, seat_file);
 
@@ -132,11 +134,15 @@ void addTransaction(int id) {
             printf("| Total Price   : %.2f\n", ticket.total_price);
             printf("| Seat No(s)    : %s\n", ticket.seat_no);
             printf("================Data Successfully Stored================\n");
+            printf("// Press any key to continue...");
+            getch();
+            printf("\033[H\033[J");
             break;
         } 
     }
 
     if (isFound != true) {
+        printf("\033[H\033[J");
         printf("=!!Invalid Id!!=");
     }
 
@@ -154,6 +160,7 @@ void readTransaction() {
     }
 
     struct Ticket ticket;
+    printf(">> Transaction(s) List");
     printf("\n===================================================================================\n");
     printf("|    Full Name    |     Film Name     |   Seat No   | Tick Amount |  Total Price  |\n");
     printf("===================================================================================\n");

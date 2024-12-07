@@ -33,10 +33,12 @@ void adminLogin() {
                 viewFilmSeats(choice);
                 break;
             case 4:
+                printf("\033[H\033[J");
                 return;
             
             default:
-                printf("=!!Invalid Command!!=\n");
+                printf("\033[H\033[J");
+                printf("=!!Invalid Command!!=");
                 break;
         }
     }
@@ -68,10 +70,12 @@ void userLogin() {
                 readTransaction();
                 break;
             case 4:
+                printf("\033[H\033[J");
                 return;
             
             default:
-                printf("=!!Invalid Command!!=\n");
+                printf("\033[H\033[J");
+                printf("=!!Invalid Command!!=");
                 break;
         }
     }
@@ -79,7 +83,6 @@ void userLogin() {
 
 int main() {
     while (1) {
-        printf("\033[H\033[J");
         printf("==============================================\n");
         printf("| Theatre Management System                  |\n");
         printf("==============================================\n");
@@ -103,6 +106,7 @@ int main() {
                 break;
             
             default:
+                printf("\033[H\033[J");
                 printf("=!!Invalid Command!!=\n");
                 break;
         }

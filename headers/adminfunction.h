@@ -33,41 +33,41 @@ void addFilms(int amount) {
         exit(1);
     }
 
-    for (i = 0; i < amount; i++) {
-        fprintf(
-            film_file,
-            "%d %s; %s %.2f %.2f %s;\n",
-            film[i].id,
-            film[i].name,
-            film[i].release_date,
-            film[i].rating,
-            film[i].price,
-            film[i].genre
-        );
-    }
+    // for (i = 0; i < amount; i++) {
+    //     fprintf(
+    //         film_file,
+    //         "%d %s; %s %.2f %.2f %s;\n",
+    //         film[i].id,
+    //         film[i].name,
+    //         film[i].release_date,
+    //         film[i].rating,
+    //         film[i].price,
+    //         film[i].genre
+    //     );
+    // }
 
     fclose(film_file);
 
-    for (i = 0; i < amount; i++) {
-        char filepath[] = "./data/seats/";
-        strcat(filepath, film[i].name);
-        strcat(filepath, ".txt");
-        FILE *seat_file = fopen(filepath, "w");
-        if (seat_file == NULL) {
-            perror("Cannot open file!\n");
-            exit(1);
-        }
+    // for (i = 0; i < amount; i++) {
+    //     char filepath[] = "./data/seats/";
+    //     strcat(filepath, film[i].name);
+    //     strcat(filepath, ".txt");
+    //     FILE *seat_file = fopen(filepath, "w");
+    //     if (seat_file == NULL) {
+    //         perror("Cannot open file!\n");
+    //         exit(1);
+    //     }
 
-        for (i = 0; i < 5; i++) {
-            fprintf(seat_file, "o o o o o o o\n");
-        }
+    //     for (i = 0; i < 5; i++) {
+    //         fprintf(seat_file, "o o o o o o o\n");
+    //     }
 
-        fclose(seat_file);
-    }
+    //     fclose(seat_file);
+    // }
 
     printf("\033[H\033[J");
     for (i = 0; i < amount; i++) {
-        printf("\n// Film Info:\n");
+        printf("\n// Film-%d Info:\n", i+1);
         printf("| Id: %d\n", film[i].id);
         printf("| Name: %s\n", film[i].name);
         printf("| Release Date: %s\n", film[i].release_date);
@@ -76,6 +76,9 @@ void addFilms(int amount) {
         printf("| Genre(s): %s\n", film[i].genre);
     }
     printf("================Data Successfully Stored================\n");
+    printf("// Press any key to continue...");
+    getch();
+    printf("\033[H\033[J");
 }
 
 void readFilms(bool isViewing) {
@@ -88,6 +91,7 @@ void readFilms(bool isViewing) {
     }
 
     struct Film film;
+    printf(">> Film(s) List");
     printf("\n=================================================================================\n");
     printf("| Id |        Name        | Release Date | Rating |   Price   |      Genre      |\n");
     printf("=================================================================================\n");

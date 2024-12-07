@@ -3,3 +3,5 @@ Adam Sadewa; Despicable Me; C3,C4; 2 90000.00
 Kiral; Fallen Arpeggio; D1,D2,D3; 3 120000.00
 Naufal; Fallen Arpeggio; C5; 1 40000.00
 Admin; Fallen Arpeggio; C6; 1 40000.00
+Tester; Fallen Arpeggio; D6,D7; 2 80000.00
+Jason Thor Hall; Despicable Me; B6,B7; 2 90000.00
