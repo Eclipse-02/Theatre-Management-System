@@ -1,6 +1,29 @@
 # Theatre Management System
 A simple theatre management system app using C file and data handling.
 
+## Folder Structure
+```
+\root
+|   UAS.c
+│   README.md 
+│
+└───\data
+│   │
+│   └───\films
+│   |   │   film_data.txt
+│   |
+|   └───\seats
+|   |   |   *.txt
+│   |
+│   └───\transactions
+│   |   │   transaction_data.txt
+│
+└───\headers
+    │   adminfunction.h
+    │   define.h
+    │   userfunction.h
+```
+
 ## 1. Main Menu
 In the main menu you can login as admin or user and stop the application.
 
