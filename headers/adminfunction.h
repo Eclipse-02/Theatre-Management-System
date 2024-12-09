@@ -33,37 +33,37 @@ void addFilms(int amount) {
         exit(1);
     }
 
-    // for (i = 0; i < amount; i++) {
-    //     fprintf(
-    //         film_file,
-    //         "%d %s; %s %.2f %.2f %s;\n",
-    //         film[i].id,
-    //         film[i].name,
-    //         film[i].release_date,
-    //         film[i].rating,
-    //         film[i].price,
-    //         film[i].genre
-    //     );
-    // }
+    for (i = 0; i < amount; i++) {
+        fprintf(
+            film_file,
+            "%d %s; %s %.2f %.2f %s;\n",
+            film[i].id,
+            film[i].name,
+            film[i].release_date,
+            film[i].rating,
+            film[i].price,
+            film[i].genre
+        );
+    }
 
     fclose(film_file);
 
-    // for (i = 0; i < amount; i++) {
-    //     char filepath[] = "./data/seats/";
-    //     strcat(filepath, film[i].name);
-    //     strcat(filepath, ".txt");
-    //     FILE *seat_file = fopen(filepath, "w");
-    //     if (seat_file == NULL) {
-    //         perror("Cannot open file!\n");
-    //         exit(1);
-    //     }
+    for (i = 0; i < amount; i++) {
+        char filepath[] = "./data/seats/";
+        strcat(filepath, film[i].name);
+        strcat(filepath, ".txt");
+        FILE *seat_file = fopen(filepath, "w");
+        if (seat_file == NULL) {
+            perror("Cannot open file!\n");
+            exit(1);
+        }
 
-    //     for (i = 0; i < 5; i++) {
-    //         fprintf(seat_file, "o o o o o o o\n");
-    //     }
+        for (i = 0; i < 5; i++) {
+            fprintf(seat_file, "o o o o o o o\n");
+        }
 
-    //     fclose(seat_file);
-    // }
+        fclose(seat_file);
+    }
 
     printf("\033[H\033[J");
     for (i = 0; i < amount; i++) {
@@ -168,5 +168,4 @@ void viewFilmSeats(int id) {
 
     fclose(film_file);
 }
-
 #endif
